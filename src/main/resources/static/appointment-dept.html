@@ -148,7 +148,7 @@
                 <div class="col-lg-12">
                     <div style="padding: 30px 10px; text-align: center; margin-bottom: 30px;">
                         <div style="float:left; margin-left: 15%; margin-right: 6%;">
-                            <h3 id="step-dept" style="color: #1A76D1;">1. 选择科室</h3>
+                            <h3 id="step-dept" style="color: #FFB6C1;">1. 选择科室</h3>
                         </div>
                         <div style="float:left;">
                             <h3 style="color: lightslategray;">></h3>
@@ -435,7 +435,7 @@
             display: table-cell;
             vertical-align: middle;
             color: white;
-            background-color: #1a76d1;
+            background-color: #FFB6C1;
         }
 
         .timetable {
@@ -479,7 +479,7 @@
 
             document.getElementById('option-dept').style.display = 'none';
             document.getElementById('option-time').style.display = 'block';
-            document.getElementById('step-time').style.color = '#1A76D1';//选择就诊时间
+            document.getElementById('step-time').style.color = '#FFB6C1';//选择就诊时间
             document.getElementById('step-dept').style.color = 'lightslategray';//选择科室
 
             $('#selected-dept').text(deptName)
@@ -537,7 +537,7 @@
 			var time = children[1].innerHTML.substring(0, 5) + ':00'
 			selectedTime = date + ' ' + time
 
-            document.getElementById('step-done').style.color = '#1A76D1'
+            document.getElementById('step-done').style.color = '#FFB6C1'
             document.getElementById('step-time').style.color = 'lightslategray';
             document.getElementById('option-time').style.display = 'none';
             document.getElementById('option-confirm').style.display = 'block';
