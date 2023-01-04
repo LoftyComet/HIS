@@ -246,6 +246,11 @@
     </style>
 
     <script>
+        $(location).ready(function(){
+            if(sessionStorage.getItem("pharmacistId")==null){
+                window.location.href = "index2.html";
+            }
+        })
         function searchTake() {
             var takeId = $('#take-id').val()
             console.log(takeId)

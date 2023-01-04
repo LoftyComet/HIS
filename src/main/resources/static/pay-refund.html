@@ -252,6 +252,9 @@
 
     <script>
         $(document).ready(function() {
+            if(sessionStorage.getItem("cashierId")==null){
+                window.location.href = "index2.html";
+            }
             $('#paying-items').css('display','none')
         })
 

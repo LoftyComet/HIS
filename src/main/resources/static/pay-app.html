@@ -211,7 +211,12 @@
     </style>
 
     <script>
-        $(location).ready(function(){$('#app-list').html('')})
+        $(location).ready(function(){
+            if(sessionStorage.getItem("cashierId")==null){
+                window.location.href = "index2.html";
+            }
+            $('#app-list').html('')
+        })
         function searchApp() {
             $('#app-list').html('') // 清空内容
 

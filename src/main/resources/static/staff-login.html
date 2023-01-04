@@ -166,6 +166,11 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
     <script type="text/javascript">
+        $(document).ready(function(){
+		    sessionStorage.removeItem("cashierId")
+		    sessionStorage.removeItem("doctorId")
+		    sessionStorage.removeItem("pharmacistId")
+	    });
         function check() {
             var password = document.getElementById("password").value;
             if (password == "") {

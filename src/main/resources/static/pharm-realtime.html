@@ -273,6 +273,10 @@
     <script>
 
         $(location).ready(function () {
+            console.log(sessionStorage.getItem("pharmacistId"))
+            if(sessionStorage.getItem("pharmacistId")==null){
+                window.location.href = "index2.html";
+            }
             selectedId = ''
             pList = []
             sList = []

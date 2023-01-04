@@ -377,6 +377,9 @@
 
 
         $(document).ready(function () { // department
+            if(sessionStorage.getItem("cashierId")==null){
+                window.location.href = "index2.html";
+            }
             doctorDeptNumber = { 'DE000001': [], 'DE000002': [], 'DE000003': [], 'DE000004': [], 'DE000005': [], 'DE000006': [], }
             deptNumber = {'DE000001': 0, 'DE000002': 0, 'DE000003': 0, 'DE000004': 0, 'DE000005': 0, 'DE000006': 0}
             docNumber = {}

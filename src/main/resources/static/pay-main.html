@@ -286,6 +286,9 @@
 
     <script>
         $(document).ready(function () {
+            if(sessionStorage.getItem("cashierId")==null){
+                window.location.href = "index2.html";
+            }
             payMoney = 0
             payWayList = ['现金支付', '微信支付', '支付宝支付']
             itemList = []

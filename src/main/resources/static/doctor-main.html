@@ -568,6 +568,9 @@
 
     <script>
         $(document).ready(function () {
+            if(sessionStorage.getItem("doctorId")==null){
+                window.location.href = "index2.html";
+            }
             recordId = $('#patient-infoo').data('id')
             $('#meds-drawer').css('display', 'none')
             $('#searched-meds-name').html('')

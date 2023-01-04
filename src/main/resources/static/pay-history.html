@@ -214,7 +214,12 @@
             alert("您无权限访问此功能!")
         };
 
-        $(location).ready(function(){$('#history-list').html('')});
+        $(location).ready(function(){
+            if(sessionStorage.getItem("cashierId")==null){
+                window.location.href = "index2.html";
+            }
+            $('#history-list').html('')
+        });
         function searchHistory() {
             $('#history-list').html('');// 清空内容
 

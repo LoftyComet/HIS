@@ -190,7 +190,12 @@
     </style>
 
     <script>
-        $(location).ready(function(){$('#history-list').html('')})
+        $(location).ready(function(){
+            if(sessionStorage.getItem("pharmacistId")==null){
+                window.location.href = "index2.html";
+            }
+            $('#history-list').html('')
+        })
         function searchHistory() {
             $('#history-list').html('');// 清空内容
             var patientIdentity = $('#search-id').val();
@@ -212,6 +217,9 @@
                             time='0'+time
                         }
                         time=date+' '+time+":"+d.getMinutes()+":"+d.getSeconds()
+                        if (year == 1970){
+                            time = "暂未取药"
+                        }
                         var d = new Date(data[i].billTime);
                         var year = d.getFullYear()
                         var month = d.getMonth()+1
