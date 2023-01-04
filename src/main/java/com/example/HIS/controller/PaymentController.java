@@ -63,9 +63,9 @@ public class PaymentController {
         Map<String, Integer> checkMoneyList=new HashMap<>();
         checkMoneyList.put( "心电图", 30);
         checkMoneyList.put( "颅脑平扫",1000);
-        checkMoneyList.put( "'胸部平扫'", 500);
-        checkMoneyList.put( "'胸部正侧位片'",500);
-        checkMoneyList.put( "'胸腰段正侧位'", 500);
+        checkMoneyList.put( "胸部平扫", 500);
+        checkMoneyList.put( "胸部正侧位片",500);
+        checkMoneyList.put( "胸腰段正侧位", 500);
         Map<String, String> parameter = new HashMap<>();
         response.setContentType("text/html; charset=utf-8");
         String patientId=request.getParameter("patientId");
