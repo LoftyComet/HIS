@@ -91,7 +91,7 @@
                                 <div class="get-quote" style="float: right;">
                                     <a href="staff-login.html" class="btn">退出</a>
                                 </div>
-                                <div class="get-quote" style="float: right; padding-right: 30px;" onclick="nextPatient()">
+                                <div class="get-quote" style="float: right; padding-right: 30px;" onclick="nextPatient()" disabled="false" id="next">
                                     <a href="#" class="btn">诊毕</a>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
     </header>
 
     <!-- Start portfolio -->
-    <section class="portfolio section" style="padding-top: 20px; height: 60%; width: 100%; ">
+    <section class="portfolio section" style="padding-top: 20px; height: 60%; width: 100%; " id="portfolio">
         <!-- Start patient info -->
         <div class="patient-info" id="patient-infoo" data-id="0">
             <p>
@@ -121,7 +121,7 @@
         <!-- End patient info -->
 
         <!-- Start function: records, checkups, prescriptions -->
-        <header class="header style2">
+        <header class="header style2" id="header1">
             <div class="header-inner">
                 <div class="container">
                     <div class="inner">
@@ -590,11 +590,23 @@
                         gender="女"
                     }
                     else gender="男"
-                    $('#patient-name').text("姓名："+data.patientName)
-                    $('#patient-name').data('id', data.patientId)
-                    $('#patient-age').text("年龄："+calAge(data.patientId))
-                    $('#patient-gender').text("性别："+gender)
-                    $('#register-number').text("就诊号："+data.registerNumber)
+                    if(data.status=="fail"){
+                        $('#patient-name').text("当前暂无病人")
+                        $('#patient-age').text("")
+                        $('#patient-gender').text("")
+                        $('#register-number').text("")
+                        $("#next").hide();
+                        $("#header1").hide();
+                        $("#doc-records").hide();
+                    }
+
+                    else {
+                        $('#patient-name').text("姓名："+data.patientName)
+                        $('#patient-name').data('id', data.patientId)
+                        $('#patient-age').text("年龄："+calAge(data.patientId))
+                        $('#patient-gender').text("性别："+gender)
+                        $('#register-number').text("就诊号："+data.registerNumber)
+                    }
                 },
             })
         })
@@ -859,17 +871,22 @@
                         gender="女"
                     }
                     else gender="男"
-                    $('#patient-name').text("姓名："+data.patientName)
-                    $('#patient-name').data('id', data.patientId)
-                    $('#patient-age').text("年龄："+calAge(data.patientId))
-                    $('#patient-gender').text("性别："+gender)
-                    $('#register-number').text("就诊号："+data.registerNumber)
-
-                    // $('#patient-name').text(data.patientName)
-                    // $('#patient-name').data('id', data.patientId)
-                    // $('#patient-age').text(calAge(data.patientId))
-                    // $('#patient-gender').text(data.patientGender)
-                    // $('#register-number').text(data.registerNumber)
+                    if(data.status=="fail"){
+                        $('#patient-name').text("当前暂无病人")
+                        $('#patient-age').text("")
+                        $('#patient-gender').text("")
+                        $('#register-number').text("")
+                        $("#next").hide();
+                        $("#header1").hide();
+                        $("#doc-records").hide();
+                    }
+                    else{
+                        $('#patient-name').text("姓名："+data.patientName)
+                        $('#patient-name').data('id', data.patientId)
+                        $('#patient-age').text("年龄："+calAge(data.patientId))
+                        $('#patient-gender').text("性别："+gender)
+                        $('#register-number').text("就诊号："+data.registerNumber)
+                    }
                     location.reload()
                 },
             })
