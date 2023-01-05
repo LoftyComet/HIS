@@ -145,6 +145,14 @@
                                 <li id="completed"><a href="#" onclick="showCompleted()">已完成</a></li>
                                 <li id="cancelled"><a href="#" onclick="showCancelled()">已取消</a></li>
                             </ul>
+
+                        </div>
+                        <div class="single-widget category">
+                            <h3 class="title">我的配药记录</h3>
+                            <ul class="categor-list">
+                                <li id="allMeRecords"><a href="#" onclick="showAllMeRecords()">全部记录</a></li>
+                            </ul>
+
                         </div>
                         <!--/ End Single Widget -->
                     </div>
@@ -247,6 +255,31 @@
                 </div>
                 <!-- End cancelled -->
 
+                <!-- Start completed -->
+                <div class="func-option doc-completed" id="me-all" style="display: none;" class="col-lg-9 col-12">
+                    <div class="main-sidebar">
+                        <div class="single-widget category">
+                            <h3 class="title">配药记录</h3>
+                            <div>
+                                <table class="table" id="meTable">
+                                    <thead>
+                                    <tr>
+                                        <th>取药单号</th>
+                                        <th>主治医生</th>
+                                        <th>开药时间</th>
+                                        <th>发药医生</th>
+                                        <th>取药时间</th>
+                                        <th>状态</th>
+                                    </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+                        </div>
+                        <!--/ End Single Widget -->
+                    </div>
+                </div>
+                <!-- End completed -->
             </div>
         </div>
     </section>
@@ -465,7 +498,8 @@
         .doc-allrecords,
         .doc-confirmed,
         .doc-completed,
-        .doc-cancelled
+        .doc-cancelled,
+        .me-all
 
     </style>
 
@@ -510,6 +544,73 @@
             })
         }
 
+        function showAllMeRecords() {
+            if ($("allMeRecords").hasClass('active')) return;
+
+            $("#allMeRecords").addClass('active')
+            if ($("#confirmed").hasClass) $("#confirmed").removeClass('active')
+            if ($("#completed").hasClass) $("#completed").removeClass('active')
+            if ($("#cancelled").hasClass) $("#cancelled").removeClass('active')
+            if ($("#allrecords").hasClass('active')) $("#allrecords").removeClass('active')
+
+            $("#doc-allrecords").css('display','none')
+            $("#doc-confirmed").css('display','none')
+            $("#doc-completed").css('display','none')
+            $("#doc-cancelled").css('display','none')
+            $("#me-all").css('display','block')
+
+            var temp = '';
+            $.ajax({
+                type: "get",
+                dataType:"json",
+                url: "/getTmt",
+                success: function(data) {
+                    console.log(data)
+                    for (var i = 0; i < data.length; i++) {
+                        var d = new Date(data[i].takeTime);
+                        var year = d.getFullYear()
+                        var month = d.getMonth()+1
+                        var day = d.getDate()
+                        var date = year + '-' + month + '-' + day
+                        var time = d.getHours()
+                        if (time<10){
+                            time='0'+time
+                        }
+                        time=date+' '+time+":"+d.getMinutes()+":"+d.getSeconds()
+                        if (year == 1970){
+                            time = "暂未取药"
+                        }
+                        var d = new Date(data[i].billTime);
+                        var year = d.getFullYear()
+                        var month = d.getMonth()+1
+                        var day = d.getDate()
+                        var date = year + '-' + month + '-' + day
+                        var time2 = d.getHours()
+                        if (time2<10){
+                            time2='0'+time2
+                        }
+                        time2=date+' '+time2+":"+d.getMinutes()+":"+d.getSeconds()
+                        var takeFlag='';
+                        if(true){
+                            takeFlag=data[i].takeState
+                            temp +=
+                                '<tr>' +
+                                '<td>' + data[i].takeId + '</td>' +
+                                '<td>' + data[i].mainDoc + '</td>' +
+                                '<td>' + time2 + '</td>' +
+                                '<td>' + data[i].pharDoc + '</td>' +
+                                '<td>' + time + '</td>' +
+                                '<td>' + takeFlag + '</td>' +
+                                '</tr>'
+
+                        }
+                    console.log(temp);
+                    $("#meTable tr:not(:first)").html(""); /*  除了第一行tr的内容，其余内容清空，防止获取重复的数据  */
+                    $("#meTable").append(temp);
+                    }
+                }
+            })
+        }
 
         function showAllrecords() {
             if ($("allrecords").hasClass('active')) return;
@@ -518,11 +619,13 @@
             if ($("#confirmed").hasClass) $("#confirmed").removeClass('active')
             if ($("#completed").hasClass) $("#completed").removeClass('active')
             if ($("#cancelled").hasClass) $("#cancelled").removeClass('active')
+            if ($("#allMeRecords").hasClass('active')) $("#allMeRecords").removeClass('active')
 
             $("#doc-allrecords").css('display','block')
             $("#doc-confirmed").css('display','none')
             $("#doc-completed").css('display','none')
             $("#doc-cancelled").css('display','none')
+            $("#me-all").css('display','none')
 
             var temp = '';
             $.ajax({
@@ -624,11 +727,13 @@
             if ($("#allrecords").hasClass('active')) $("#allrecords").removeClass('active')
             if ($("#completed").hasClass('active')) $("#completed").removeClass('active')
             if ($("#cancelled").hasClass('active')) $("#cancelled").removeClass('active')
+            if ($("#allMeRecords").hasClass('active')) $("#allMeRecords").removeClass('active')
 
             $("#doc-allrecords").css('display','none')
             $("#doc-confirmed").css('display','block')
             $("#doc-completed").css('display','none')
             $("#doc-cancelled").css('display','none')
+            $("#me-all").css('display','none')
 
             var temp = '';
             $.ajax({
@@ -684,11 +789,13 @@
             if ($("#allrecords").hasClass('active')) $("#allrecords").removeClass('active')
             if ($("#confirmed").hasClass('active')) $("#confirmed").removeClass('active')
             if ($("#cancelled").hasClass('active')) $("#cancelled").removeClass('active')
+            if ($("#allMeRecords").hasClass('active')) $("#allMeRecords").removeClass('active')
 
             $("#doc-allrecords").css('display','none')
             $("#doc-confirmed").css('display','none')
             $("#doc-completed").css('display','block')
             $("#doc-cancelled").css('display','none')
+            $("#me-all").css('display','none')
 
             var temp = '';
             $.ajax({
@@ -744,11 +851,13 @@
             if ($("#allrecords").hasClass('active')) $("#allrecords").removeClass('active')
             if ($("#confirmed").hasClass('active')) $("#confirmed").removeClass('active')
             if ($("#completed").hasClass('active')) $("#completed").removeClass('active')
+            if ($("#allMeRecords").hasClass('active')) $("#allMeRecords").removeClass('active')
 
             $("#doc-allrecords").css('display','none')
             $("#doc-confirmed").css('display','none')
             $("#doc-completed").css('display','none')
             $("#doc-cancelled").css('display','block')
+            $("#me-all").css('display','none')
 
             var temp = '';
             $.ajax({
