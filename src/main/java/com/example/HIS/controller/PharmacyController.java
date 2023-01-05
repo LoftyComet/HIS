@@ -225,12 +225,19 @@ public class PharmacyController {
             PrescriptionTable prescriptionTable = pharmacyService.selectPrescription(precriptionid);
             String medicineId = prescriptionTable.getMedicineId();
 
+            if(takeMedineTable.getTakeState() == 4){
+                parameter.put("status","failed");
+                parameter.put("msg","不可反复退药");
+                return JSON.toJSONString(parameter);
+            }
+
             if (takeMedineTable.getTakeState() == 3 || takeMedineTable.getTakeState() == 2){
                 Medicine medicine = pharmacyService.getMedicine(medicineId);
                 int tot= medicine.getMedicineNumber()+prescriptionTable.getMedicineNumber();
                 medicine.setMedicineNumber(tot);
                 pharmacyService.updateMedicine(medicine);
             }
+
             takeMedineTable.setTakeState(4);
             pharmacyService.updateTakeMedicine(takeMedineTable);
 
